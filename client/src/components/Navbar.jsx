@@ -107,7 +107,7 @@ const Navbar = () => {
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex space-x-6">
             <div className="flex items-center space-x-1"><FaPhoneAlt size={12} /><span>Emergency: +91-987-654-3210</span></div>
-            <div className="flex items-center space-x-1"><FaMapMarkerAlt size={12} /><span>307514 Reoder, Sirohi, Rajasthan, India</span></div>
+            <div className="flex items-center space-x-1"><FaMapMarkerAlt size={12} /><span>490020, Bhilai, Chhattishgarh, India</span></div>
           </div>
           <div className="flex items-center space-x-1"><GiMedicines size={14} /><span>24/7 Pharmacy Services</span></div>
         </div>
@@ -117,8 +117,8 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center cursor-pointer" onClick={() => navigate("/")}>
-          <img src={assets.logo} alt="Neurica Logo" className="h-10 mr-2" />
-          <span className="text-2xl font-bold text-blue-800">Neurica</span>
+          <img src={assets.logo} alt="HealHorizon Logo" className="h-10 mr-2" />
+          <span className="text-2xl font-bold text-blue-800">HealHorizon</span>
         </div>
 
         {/* Desktop Navigation */}
@@ -164,8 +164,8 @@ const Navbar = () => {
       <div className={`md:hidden fixed top-0 left-0 w-72 h-full z-50 bg-white transform transition-transform duration-300 shadow-2xl ${showMenu ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex justify-between items-center p-4 border-b border-gray-200">
           <div className="flex items-center cursor-pointer" onClick={() => { navigate("/"); setShowMenu(false); }}>
-            <img src={assets.logo} alt="Neurica Logo" className="h-8 mr-2" />
-            <span className="text-xl font-bold text-blue-800">Neurica</span>
+            <img src={assets.logo} alt="HealHorizon Logo" className="h-8 mr-2" />
+            <span className="text-xl font-bold text-blue-800">HealHorizon</span>
           </div>
           <button className="text-gray-500" onClick={() => setShowMenu(false)}><FaTimes size={24} /></button>
         </div>

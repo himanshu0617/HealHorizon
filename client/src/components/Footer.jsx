@@ -92,7 +92,7 @@ const Footer = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-gray-700 font-medium">hello@neurica.com</p>
+                                    <p className="text-gray-700 font-medium">hello@healhorizon.com</p>
                                     <p className="text-sm text-gray-500 mt-1">We reply within 24 hours</p>
                                 </div>
                             </li>
@@ -104,8 +104,8 @@ const Footer = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-gray-700 font-medium">307514 Reoder, Sirohi</p>
-                                    <p className="text-sm text-gray-500 mt-1">Rajasthan, India</p>
+                                    <p className="text-gray-700 font-medium">490020, Bhilai</p>
+                                    <p className="text-sm text-gray-500 mt-1">Chhattishgarh, India</p>
                                 </div>
                             </li>
                         </ul>
@@ -141,7 +141,7 @@ const Footer = () => {
                 <div className="border-t border-gray-200 pt-8">
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         <p className="text-gray-500 text-sm mb-4 md:mb-0">
-                            &copy; {new Date().getFullYear()} Neurica. All rights reserved.
+                            &copy; {new Date().getFullYear()} HealHorizon. All rights reserved.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
                             <a href="#" className="text-gray-500 hover:text-blue-600 text-sm transition-colors">Terms of Service</a>
@@ -152,12 +152,12 @@ const Footer = () => {
                         <p className="text-gray-500 text-sm mt-4 md:mt-0">
                             Crafted with <span className="text-red-500">♥</span> by{' '}
                             <a
-                                href="https://www.linkedin.com/in/jay-joshi-75b75124b/"
+                                href="https://www.linkedin.com/in/himanshu-karan-845438316/"
                                 className="text-blue-500 hover:underline"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Jay Joshi
+                                Himanshu Karan
                             </a>
                         </p>
                     </div>
