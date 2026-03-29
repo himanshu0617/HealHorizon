@@ -34,8 +34,8 @@ const Contact = () => {
                 </svg>
                 Our Office
               </p>
-              <p className='text-gray-600 mb-2'>307514 Reoder, Sirohi</p>
-              <p className='text-gray-600'>Rajasthan, India</p>
+              <p className='text-gray-600 mb-2'>490020, Bhilai, India</p>
+              <p className='text-gray-600'>Chhattishgarh, India</p>
             </div>
             
             <div className='mb-8'>
@@ -50,7 +50,7 @@ const Contact = () => {
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                 </svg>
-                Email: joshijayy421@gmail.com
+                Email: himanshukaran729@gmail.com
               </p>
             </div>
             
@@ -83,7 +83,7 @@ const Contact = () => {
             </h3>
             <div className='aspect-w-16 aspect-h-9 rounded-lg overflow-hidden border-2 border-white shadow-md'>
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29017.639889648355!2d72.48637549425632!3d24.616618881521728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395cd2ab131ddef7%3A0x5c6c8ab89b21dfbf!2sRevdar%2C%20Rajasthan%20307514!5e0!3m2!1sen!2sin!4v1763853005356!5m2!1sen!2sin" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119037.51159297545!2d81.25567310902916!3d21.195247875871598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a293cccec49ed45%3A0x2b3ff3bd73c91877!2sBhilai%2C%20Chhattisgarh!5e0!3m2!1sen!2sin!4v1774778197780!5m2!1sen!2sin" 
                 width="100%" 
                 height="300" 
                 style={{border:0}} 
