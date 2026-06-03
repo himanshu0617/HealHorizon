@@ -37,6 +37,7 @@ const connectDB = async () => {
       serverSelectionTimeoutMS: 5000, // Fail fast if can't reach server
       socketTimeoutMS: 45000,         // Drop idle sockets
       family: 4,                      // Use IPv4 (faster DNS)
+      bufferCommands: false,          // Fail fast if not connected
     });
   };
 
