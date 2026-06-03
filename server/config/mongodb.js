@@ -29,8 +29,7 @@ const connectDB = async () => {
   const primaryUri = atlasUri || fallbackLocalUri;
 
   if (!primaryUri) {
-    console.error("❌ No MongoDB connection string provided. Set MONGODB_URI or MONGODB_LOCAL_URI.");
-    process.exit(1);
+    throw new Error("No MongoDB connection string provided. Set MONGODB_URI or MONGODB_LOCAL_URI.");
   }
 
   const connectWithUri = async (uri) => {
@@ -51,11 +50,10 @@ const connectDB = async () => {
       try {
         await connectWithUri(fallbackLocalUri);
       } catch (fallbackErr) {
-        console.error("❌ Local MongoDB fallback also failed:", fallbackErr.message);
-        process.exit(1);
+        throw new Error(`Atlas connection failed and local MongoDB fallback also failed: ${fallbackErr.message}`);
       }
     } else {
-      process.exit(1);
+      throw err;
     }
   }
 };

@@ -29,21 +29,26 @@ let isInitialized = false;
 
 const initializeApp = async () => {
   if (!isInitialized) {
-    try {
-      await connectDB();
-      await connectCloudinary();
-      isInitialized = true;
-      console.log("✅ Database and Cloudinary initialized");
-    } catch (err) {
-      console.error("❌ Failed to initialize:", err.message);
-    }
+    await connectDB();
+    await connectCloudinary();
+    isInitialized = true;
+    console.log("✅ Database and Cloudinary initialized");
   }
 };
 
 // Middleware to initialize on first request (Must be before routes so that it executes for all endpoints)
 app.use(async (req, res, next) => {
-  await initializeApp();
-  next();
+  try {
+    await initializeApp();
+    next();
+  } catch (err) {
+    console.error("❌ Failed to initialize:", err.message);
+    res.status(500).json({
+      success: false,
+      message: "Database or Cloudinary initialization failed. If you are using MongoDB Atlas, make sure you have allowed access from all IPs (0.0.0.0/0) in your Atlas Network Access settings.",
+      error: err.message
+    });
+  }
 });
 
 // Routes
