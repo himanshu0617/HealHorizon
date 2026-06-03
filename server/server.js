@@ -27,6 +27,7 @@ app.get("/health", (req, res) => {
   res.json({
     status: "OK",
     db: mongoose.connection.readyState === 1 ? "connected" : "disconnected",
+    dbName: mongoose.connection.name,
     uptime: process.uptime(),
   });
 });
