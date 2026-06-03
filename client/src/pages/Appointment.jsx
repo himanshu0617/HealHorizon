@@ -80,7 +80,18 @@ const Appointment = () => {
             return navigate('/login')
         }
 
-        const date = docSlots[slotIndex][0].datetime
+        if (!slotTime) {
+            toast.error('Please select a time slot')
+            return
+        }
+
+        const slot = docSlots[slotIndex].find(item => item.time === slotTime)
+        if (!slot) {
+            toast.error('Selected slot not found')
+            return
+        }
+
+        const date = slot.datetime
 
         let day = date.getDate()
         let month = date.getMonth() + 1
@@ -177,9 +188,9 @@ const Appointment = () => {
                                     <img className="w-5 h-5" src={assets.verified_icon} alt="Verified" />
                                 </span>
                             </h1>
-                            <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
-                                {docInfo.experience} years experience
-                            </span>
+                             <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+                                 {String(docInfo.experience).toLowerCase().includes('year') ? docInfo.experience : `${docInfo.experience} Years`} Experience
+                             </span>
                         </div>
 
                         <p className="text-xl text-blue-600 font-medium">

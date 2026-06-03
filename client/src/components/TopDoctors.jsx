@@ -81,7 +81,7 @@ const TopDoctors = () => {
                 
                 {/* Added Degree and Experience */}
                 <p className="text-gray-600 text-sm mb-3">
-                  {doctor.degree || 'BDS, MDS'} - {doctor.experience || '16'} Years Experience
+                  {doctor.degree || 'BDS, MDS'} - {String(doctor.experience).toLowerCase().includes('year') ? doctor.experience : `${doctor.experience} Years`} Experience
                 </p>
 
                 {/* Hover CTA */}

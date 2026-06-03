@@ -133,7 +133,7 @@ const Doctors = () => {
                       <h3 className="text-xl font-bold text-gray-900">{doc.name}</h3>
                       <p className="text-blue-600 font-semibold">{doc.speciality}</p>
                       <p className="text-gray-600 text-sm mb-4">
-                        {doc.degree || 'BDS, MDS'} - {doc.experience || 1} Year{doc.experience > 1 ? 's' : ''} Experience
+                        {doc.degree || 'BDS, MDS'} - {String(doc.experience).toLowerCase().includes('year') ? doc.experience : `${doc.experience} Years`} Experience
                       </p>
 
                       {/* Hover CTA */}

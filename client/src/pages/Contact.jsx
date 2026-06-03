@@ -1,117 +1,197 @@
 import React from 'react'
 import { assets } from '../assets/assets'
+import { motion } from 'framer-motion'
+import { FiMail, FiPhone, FiMapPin, FiBriefcase, FiMap, FiSmile } from 'react-icons/fi'
 
 const Contact = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    show: { y: 0, opacity: 1, transition: { duration: 0.5 } }
+  }
+
   return (
-    <div className="bg-gradient-to-b from-blue-50 to-green-50 py-16 px-4">
-      <div className='max-w-6xl mx-auto'>
-        <div className='text-center mb-16'>
-          <p className='text-3xl md:text-4xl font-light text-blue-600'>
-            CONTACT <span className='text-green-500 font-medium'>US</span>
-          </p>
-          <div className='w-24 h-1 bg-gradient-to-r from-blue-400 to-green-400 mx-auto mt-4'></div>
-        </div>
-        
-        <div className='flex flex-col items-center justify-center lg:flex-row gap-16'>
-          <div className='relative lg:w-1/2'>
-            <img 
-              src={assets.contact_image} 
-              alt="contact_image" 
-              className='rounded-xl shadow-xl w-full max-w-lg border-4 border-white' 
-            />
-            <div className='absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg hidden md:block'>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-            </div>
-          </div>
-          
-          <div className='lg:w-1/2 bg-white p-8 rounded-xl shadow-lg border border-gray-100'>
-            <div className='mb-8'>
-              <p className='font-semibold text-xl text-blue-600 mb-4 flex items-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                </svg>
-                Our Office
-              </p>
-              <p className='text-gray-600 mb-2'>490020, Bhilai, India</p>
-              <p className='text-gray-600'>Chhattishgarh, India</p>
-            </div>
-            
-            <div className='mb-8'>
-              <p className='text-gray-600 mb-2 flex items-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                Tel: +91 9876543210
-              </p>
-              <p className='text-gray-600 flex items-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-                Email: himanshukaran729@gmail.com
-              </p>
-            </div>
-            
-            <div>
-              <p className='font-semibold text-xl text-green-500 mb-4 flex items-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
-                  <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-                </svg>
-                Careers at HealHorizon
-              </p>
-              <p className='text-gray-600 mb-6'>Learn more about our teams and job openings.</p>
-              <button className='bg-gradient-to-r from-blue-400 to-green-400 text-white px-8 py-3 rounded-full font-medium hover:from-blue-500 hover:to-green-500 transition-all duration-300 shadow-md hover:shadow-lg'>
-                Explore Jobs
-              </button>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      {/* Decorative elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-20 left-20 w-64 h-64 bg-blue-100 rounded-full filter blur-[100px] opacity-10"></div>
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-cyan-100 rounded-full filter blur-[120px] opacity-10"></div>
+      </div>
 
-        {/* Map and QR Code Section */}
-        <div className='mt-20 grid grid-cols-1 md:grid-cols-2 gap-10'>
-          {/* Map Section */}
-          <div className='bg-white p-6 rounded-xl shadow-lg border border-gray-100'>
-            <h3 className='text-xl font-semibold text-blue-600 mb-4 flex items-center'>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              Find Us on Map
-            </h3>
-            <div className='aspect-w-16 aspect-h-9 rounded-lg overflow-hidden border-2 border-white shadow-md'>
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119037.51159297545!2d81.25567310902916!3d21.195247875871598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a293cccec49ed45%3A0x2b3ff3bd73c91877!2sBhilai%2C%20Chhattisgarh!5e0!3m2!1sen!2sin!4v1774778197780!5m2!1sen!2sin" 
-                width="100%" 
-                height="300" 
-                style={{border:0}} 
-                allowFullScreen="" 
-                loading="lazy"
-                title="Google Maps Location"
-              ></iframe>
-            </div>
+      <div className="relative z-10">
+        {/* Premium Hero Section */}
+        <div className="relative overflow-hidden bg-gradient-to-br from-[#001529] to-[#0c2135] py-20 px-4 sm:px-6 lg:px-8 border-b border-[#1a3a5a] shadow-lg">
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-1/4 -left-1/4 w-[500px] h-[500px] bg-[#0a2d4a] rounded-full filter blur-[100px] opacity-25"></div>
+            <div className="absolute -bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-[#1a4a7a] rounded-full filter blur-[100px] opacity-25"></div>
           </div>
 
-          {/* QR Code Section */}
-          <div className='bg-white p-6 rounded-xl shadow-lg border border-gray-100 flex flex-col items-center justify-center'>
-            <h3 className='text-xl font-semibold text-green-500 mb-4 flex items-center'>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
-              </svg>
-              Hire Here!
-            </h3>
-            <div className='bg-white p-4 rounded-lg border-2 border-blue-100 shadow-inner mb-4'>
-              {/* Replace with your QR code image from public folder */}
-              <img 
-                src="/qr-code.png" 
-                alt="QR Code" 
-                className='w-48 h-48 object-contain'
-              />
-            </div>
-            <p className='text-gray-600 text-center'>Scan this QR code to contact Developer</p>
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-7xl mx-auto text-center relative z-10"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+              Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">Our Team</span>
+            </h1>
+            <p className="text-lg md:text-xl text-blue-100/80 max-w-2xl mx-auto font-medium">
+              Have questions? We are here to help and ensure you receive exceptional support.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Main Content */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="flex flex-col lg:flex-row gap-12 items-stretch mb-20">
+            {/* Image Section */}
+            <motion.div 
+              initial={{ x: -30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:w-1/2 relative flex items-center justify-center"
+            >
+              <div className="relative group w-full h-full max-w-lg">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl opacity-0 group-hover:opacity-10 blur-lg transition-opacity duration-300"></div>
+                <img 
+                  src={assets.contact_image} 
+                  alt="Contact Us" 
+                  className="rounded-2xl shadow-xl w-full h-full object-cover border-4 border-white transform transition-transform duration-300 group-hover:-translate-y-1" 
+                />
+                <div className="absolute -bottom-6 -right-6 bg-white p-5 rounded-2xl shadow-lg border border-gray-100 hidden md:block">
+                  <FiPhone className="text-blue-500 text-3xl" />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Info Form Box */}
+            <motion.div 
+              initial={{ x: 30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="lg:w-1/2 bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-gray-100 flex flex-col justify-between"
+            >
+              <div>
+                <h3 className="font-bold text-2xl text-gray-800 mb-6 flex items-center gap-3 border-b border-gray-100 pb-4">
+                  <FiMapPin className="text-blue-500" />
+                  Our Office
+                </h3>
+                
+                <div className="space-y-6 text-gray-600 mb-8">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-blue-50 p-2.5 rounded-xl text-blue-500 mt-0.5">
+                      <FiMapPin size={20} />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-800">Address</p>
+                      <p className="text-sm mt-1">490020, Bhilai, Chhattishgarh, India</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-cyan-50 p-2.5 rounded-xl text-cyan-600 mt-0.5">
+                      <FiPhone size={20} />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-800">Phone</p>
+                      <p className="text-sm mt-1">+91 9876543210</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-teal-50 p-2.5 rounded-xl text-teal-600 mt-0.5">
+                      <FiMail size={20} />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-800">Email Address</p>
+                      <p className="text-sm mt-1">himanshukaran729@gmail.com</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-6 border-t border-gray-100">
+                <h3 className="font-bold text-2xl text-gray-800 mb-4 flex items-center gap-3">
+                  <FiBriefcase className="text-teal-600" />
+                  Careers at HealHorizon
+                </h3>
+                <p className="text-gray-600 mb-6 leading-relaxed text-sm md:text-base">
+                  Join our fast-growing team and help build the future of concierge healthcare.
+                </p>
+                <motion.button 
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-8 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition-all"
+                >
+                  Explore Jobs
+                </motion.button>
+              </div>
+            </motion.div>
           </div>
+
+          {/* Map and QR Code Section */}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            {/* Map Section */}
+            <motion.div 
+              variants={itemVariants}
+              whileHover={{ y: -4 }}
+              className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100"
+            >
+              <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                <FiMap className="text-blue-500" />
+                Find Us on Map
+              </h3>
+              <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden border border-gray-100 shadow-md">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119037.51159297545!2d81.25567310902916!3d21.195247875871598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a293cccec49ed45%3A0x2b3ff3bd73c91877!2sBhilai%2C%20Chhattisgarh!5e0!3m2!1sen!2sin!4v1774778197780!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="300" 
+                  style={{border:0}} 
+                  allowFullScreen="" 
+                  loading="lazy"
+                  title="Google Maps Location"
+                  className="rounded-lg"
+                ></iframe>
+              </div>
+            </motion.div>
+
+            {/* QR Code Section */}
+            <motion.div 
+              variants={itemVariants}
+              whileHover={{ y: -4 }}
+              className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col justify-between items-center"
+            >
+              <h3 className="w-full text-xl font-bold text-gray-800 mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                <FiSmile className="text-teal-600" />
+                Hire Developer
+              </h3>
+              <div className="flex flex-col items-center justify-center flex-1 py-4">
+                <div className="bg-white p-4 rounded-xl border border-blue-50 shadow-inner mb-4">
+                  <img 
+                    src="/qr-code.png" 
+                    alt="Developer Contact QR Code" 
+                    className="w-44 h-44 object-contain"
+                  />
+                </div>
+                <p className="text-gray-500 text-sm text-center">Scan this QR code to contact Developer</p>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import { DoctorContext } from '../context/DoctorContext'
 import { AdminContext } from '../context/AdminContext'
 import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
 
@@ -56,7 +57,7 @@ const Login = () => {
           <input onChange={(e) => setPassword(e.target.value)} value={password} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="password" required />
         </div>
         <div className='w-full text-right'>
-            <a href="/forgot-password" className='text-primary text-xs underline cursor-pointer'>Forgot Password?</a>
+            <Link to="/forgot-password" className='text-primary text-xs underline cursor-pointer'>Forgot Password?</Link>
         </div>
         <button className='bg-primary text-white w-full py-2 rounded-md text-base'>Login</button>
         {

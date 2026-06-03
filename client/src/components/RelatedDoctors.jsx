@@ -97,9 +97,8 @@ const RelatedDoctors = ({ docId, speciality }) => {
                                     <h3 className="text-xl font-semibold text-gray-900 mb-1">{doctor.name}</h3>
                                     <p className="text-blue-600 font-medium mb-1">{doctor.speciality}</p>
                                     
-                                    {/* Added Degree and Experience */}
                                     <p className="text-gray-600 text-sm mb-3">
-                                        {doctor.degree || 'BDS, MDS'} - {doctor.experience || '16'} Years Experience
+                                        {doctor.degree || 'BDS, MDS'} - {String(doctor.experience).toLowerCase().includes('year') ? doctor.experience : `${doctor.experience} Years`} Experience
                                     </p>
 
                                     {/* CTA on Hover */}

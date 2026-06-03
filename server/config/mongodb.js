@@ -24,15 +24,39 @@ const connectDB = async () => {
     console.warn("⚠️ Database disconnected");
   });
 
-  try {
-    await mongoose.connect(`${process.env.MONGODB_URI}/test`, {
+  const atlasUri = process.env.MONGODB_URI?.trim();
+  const fallbackLocalUri = process.env.MONGODB_LOCAL_URI?.trim() || "mongodb://127.0.0.1:27017/HealHorizon";
+  const primaryUri = atlasUri || fallbackLocalUri;
+
+  if (!primaryUri) {
+    console.error("❌ No MongoDB connection string provided. Set MONGODB_URI or MONGODB_LOCAL_URI.");
+    process.exit(1);
+  }
+
+  const connectWithUri = async (uri) => {
+    await mongoose.connect(uri, {
       serverSelectionTimeoutMS: 5000, // Fail fast if can't reach server
       socketTimeoutMS: 45000,         // Drop idle sockets
       family: 4,                      // Use IPv4 (faster DNS)
     });
+  };
+
+  try {
+    await connectWithUri(primaryUri);
   } catch (err) {
-    console.error("❌ Failed to connect to the database:", err.message);
-    process.exit(1); // Stop app if DB is critical
+    console.error("❌ Failed to connect to MongoDB:", err.message);
+
+    if (atlasUri && atlasUri !== fallbackLocalUri) {
+      console.warn("⚠️ Atlas connection failed, attempting local MongoDB fallback...");
+      try {
+        await connectWithUri(fallbackLocalUri);
+      } catch (fallbackErr) {
+        console.error("❌ Local MongoDB fallback also failed:", fallbackErr.message);
+        process.exit(1);
+      }
+    } else {
+      process.exit(1);
+    }
   }
 };
 

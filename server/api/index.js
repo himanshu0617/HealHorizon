@@ -21,7 +21,7 @@ app.use(cors({
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  allowedHeaders: ["Content-Type", "Authorization", "token", "atoken", "dtoken"]
 }));
 
 // Initialize database and Cloudinary on first request
@@ -40,6 +40,12 @@ const initializeApp = async () => {
   }
 };
 
+// Middleware to initialize on first request (Must be before routes so that it executes for all endpoints)
+app.use(async (req, res, next) => {
+  await initializeApp();
+  next();
+});
+
 // Routes
 app.use("/api/user", userRouter);
 app.use("/api/doctor", doctorRouter);
@@ -55,12 +61,6 @@ app.get("/health", (req, res) => {
     db: mongoose.connection.readyState === 1 ? "connected" : "disconnected",
     uptime: process.uptime(),
   });
-});
-
-// Middleware to initialize on first request
-app.use(async (req, res, next) => {
-  await initializeApp();
-  next();
 });
 
 // Export for Vercel serverless
