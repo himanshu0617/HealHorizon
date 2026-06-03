@@ -50,7 +50,7 @@ const connectDB = async () => {
       try {
         await connectWithUri(fallbackLocalUri);
       } catch (fallbackErr) {
-        throw new Error(`Atlas connection failed and local MongoDB fallback also failed: ${fallbackErr.message}`);
+        throw new Error(`Atlas connection failed (${err.message}) and local MongoDB fallback also failed (${fallbackErr.message})`);
       }
     } else {
       throw err;
