@@ -4,57 +4,6 @@ import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
 import nodemailer from 'nodemailer'
 
-const fallbackDoctors = [
-    {
-        _id: 'demo-doc-1',
-        name: 'Dr. Aisha Sharma',
-        speciality: 'General physician',
-        degree: 'MBBS, MD',
-        experience: '12 years',
-        about: 'Experienced general physician focused on preventive care and long-term wellness.',
-        available: true,
-        fees: 500,
-        image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=900&q=80',
-        address: { line1: 'Bhilai', city: 'Chhattisgarh', country: 'India' }
-    },
-    {
-        _id: 'demo-doc-2',
-        name: 'Dr. Riya Mehta',
-        speciality: 'Gynecologist',
-        degree: 'MBBS, DGO',
-        experience: '10 years',
-        about: 'Dedicated gynecologist offering compassionate care for women’s health and wellness.',
-        available: true,
-        fees: 700,
-        image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=900&q=80',
-        address: { line1: 'Raipur', city: 'Chhattisgarh', country: 'India' }
-    },
-    {
-        _id: 'demo-doc-3',
-        name: 'Dr. Arjun Verma',
-        speciality: 'Dermatologist',
-        degree: 'MBBS, MD (Dermatology)',
-        experience: '8 years',
-        about: 'Dermatology specialist treating skin, hair, and cosmetic concerns with evidence-based methods.',
-        available: false,
-        fees: 650,
-        image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=900&q=80',
-        address: { line1: 'Durg', city: 'Chhattisgarh', country: 'India' }
-    },
-    {
-        _id: 'demo-doc-4',
-        name: 'Dr. Neha Kapoor',
-        speciality: 'Pediatricians',
-        degree: 'MBBS, DCH',
-        experience: '9 years',
-        about: 'Childcare specialist helping infants, children, and teens grow healthy and strong.',
-        available: true,
-        fees: 550,
-        image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=900&q=80',
-        address: { line1: 'Bilaspur', city: 'Chhattisgarh', country: 'India' }
-    }
-];
-
 // API for doctor Login 
 const loginDoctor = async (req, res) => {
 
@@ -147,12 +96,8 @@ const doctorList = async (req, res) => {
         res.json({ success: true, doctors })
 
     } catch (error) {
-        console.warn('⚠️ MongoDB doctor list unavailable; sending fallback doctor data.')
-        res.json({
-            success: true,
-            doctors: fallbackDoctors,
-            mode: 'demo-fallback'
-        })
+        console.log(error)
+        res.json({ success: false, message: error.message })
     }
 
 }
