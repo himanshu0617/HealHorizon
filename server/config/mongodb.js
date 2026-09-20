@@ -4,7 +4,7 @@ const connectDB = async () => {
   // Prevent duplicate connections
   if (mongoose.connection.readyState >= 1) {
     console.log("✅ Already connected to the database");
-    return;
+    return true;
   }
 
   // Attach listeners only once
@@ -29,20 +29,22 @@ const connectDB = async () => {
   const primaryUri = atlasUri || fallbackLocalUri;
 
   if (!primaryUri) {
-    throw new Error("No MongoDB connection string provided. Set MONGODB_URI or MONGODB_LOCAL_URI.");
+    console.warn("⚠️ No MongoDB connection string provided. Running in demo mode.");
+    return false;
   }
 
   const connectWithUri = async (uri) => {
     await mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 5000, // Fail fast if can't reach server
-      socketTimeoutMS: 45000,         // Drop idle sockets
-      family: 4,                      // Use IPv4 (faster DNS)
-      bufferCommands: false,          // Fail fast if not connected
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+      family: 4,
+      bufferCommands: false,
     });
   };
 
   try {
     await connectWithUri(primaryUri);
+    return true;
   } catch (err) {
     console.error("❌ Failed to connect to MongoDB:", err.message);
 
@@ -50,12 +52,14 @@ const connectDB = async () => {
       console.warn("⚠️ Atlas connection failed, attempting local MongoDB fallback...");
       try {
         await connectWithUri(fallbackLocalUri);
+        return true;
       } catch (fallbackErr) {
-        throw new Error(`Atlas connection failed (${err.message}) and local MongoDB fallback also failed (${fallbackErr.message})`);
+        console.error("❌ Local MongoDB fallback also failed:", fallbackErr.message);
+        return false;
       }
-    } else {
-      throw err;
     }
+
+    return false;
   }
 };
 

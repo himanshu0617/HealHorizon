@@ -34,15 +34,25 @@ app.get("/health", (req, res) => {
 
 const startServer = async () => {
   try {
-    await connectDB();
-    await connectCloudinary();
+    const dbReady = await connectDB();
+    const cloudReady = await connectCloudinary();
+
+    if (!dbReady) {
+      console.warn("⚠️ MongoDB unavailable. The app will serve demo data for public pages.");
+    }
+
+    if (!cloudReady) {
+      console.warn("⚠️ Cloudinary unavailable. Uploaded images will not work until credentials are configured.");
+    }
 
     app.listen(port, () => {
       console.log(`🚀 Server started on PORT:${port}`);
     });
   } catch (err) {
     console.error("❌ Failed to start server:", err.message);
-    process.exit(1);
+    app.listen(port, () => {
+      console.log(`🚀 Server started in degraded mode on PORT:${port}`);
+    });
   }
 };
 
@@ -50,5 +60,4 @@ startServer();
 
 process.on("unhandledRejection", (err) => {
   console.error("Unhandled Rejection:", err.message);
-  process.exit(1);
 });

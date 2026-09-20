@@ -29,10 +29,17 @@ let isInitialized = false;
 
 const initializeApp = async () => {
   if (!isInitialized) {
-    await connectDB();
-    await connectCloudinary();
+    const dbReady = await connectDB();
+    const cloudReady = await connectCloudinary();
     isInitialized = true;
-    console.log("✅ Database and Cloudinary initialized");
+
+    if (!dbReady) {
+      console.warn("⚠️ MongoDB unavailable; public doctor data will use demo fallback.");
+    }
+
+    if (!cloudReady) {
+      console.warn("⚠️ Cloudinary not configured; image upload features are disabled.");
+    }
   }
 };
 
@@ -42,12 +49,8 @@ app.use(async (req, res, next) => {
     await initializeApp();
     next();
   } catch (err) {
-    console.error("❌ Failed to initialize:", err.message);
-    res.status(500).json({
-      success: false,
-      message: "Database or Cloudinary initialization failed. If you are using MongoDB Atlas, make sure you have allowed access from all IPs (0.0.0.0/0) in your Atlas Network Access settings.",
-      error: err.message
-    });
+    console.error("⚠️ Initialization warning:", err.message);
+    next();
   }
 });
 
