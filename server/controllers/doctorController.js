@@ -1,8 +1,10 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
+import defaultDoctors from "../config/defaultDoctors.js";
 
 // API for doctor Login 
 const loginDoctor = async (req, res) => {
@@ -92,14 +94,19 @@ const appointmentComplete = async (req, res) => {
 // API to get all doctors list for Frontend
 const doctorList = async (req, res) => {
     try {
-        const doctors = await doctorModel.find({}).select(['-password', '-email'])
-        res.json({ success: true, doctors })
-
+        if (mongoose.connection.readyState !== 1) {
+            return res.json({ success: true, doctors: defaultDoctors });
+        }
+        const doctors = await doctorModel.find({}).select(['-password', '-email']);
+        if (doctors && doctors.length > 0) {
+            return res.json({ success: true, doctors });
+        } else {
+            return res.json({ success: true, doctors: defaultDoctors });
+        }
     } catch (error) {
-        console.log(error)
-        res.json({ success: false, message: error.message })
+        console.log("Serving fallback doctor list due to error:", error.message);
+        res.json({ success: true, doctors: defaultDoctors });
     }
-
 }
 
 // API to change doctor availablity for Admin and Doctor Panel

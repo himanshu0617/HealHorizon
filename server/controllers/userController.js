@@ -9,11 +9,13 @@ import razorpay from 'razorpay';
 
 import nodemailer from 'nodemailer'
 
-// Gateway Initialize
-const razorpayInstance = new razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
-})
+// Gateway Initialize only when valid Razorpay credentials are configured
+const razorpayInstance = process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET
+    ? new razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_KEY_SECRET,
+    })
+    : null;
 
 // API to register user
 const registerUser = async (req, res) => {
@@ -239,6 +241,10 @@ const listAppointment = async (req, res) => {
 const paymentRazorpay = async (req, res) => {
     try {
 
+        if (!razorpayInstance) {
+            return res.json({ success: false, message: 'Razorpay is not configured on the server.' })
+        }
+
         const { appointmentId } = req.body
         const appointmentData = await appointmentModel.findById(appointmentId)
 
@@ -267,6 +273,10 @@ const paymentRazorpay = async (req, res) => {
 // API to verify payment of razorpay
 const verifyRazorpay = async (req, res) => {
     try {
+        if (!razorpayInstance) {
+            return res.json({ success: false, message: 'Razorpay is not configured on the server.' })
+        }
+
         const { razorpay_order_id } = req.body
         const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id)
 

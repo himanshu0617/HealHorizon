@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import axios from 'axios'
+import axios from 'axios';
+import defaultDoctors from "../assets/defaultDoctors";
 
 export const AppContext = createContext()
 
@@ -9,7 +10,7 @@ const AppContextProvider = (props) => {
     const currencySymbol = '₹'
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
-    const [doctors, setDoctors] = useState([])
+    const [doctors, setDoctors] = useState(defaultDoctors)
     const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : '')
     const [userData, setUserData] = useState(false)
 
@@ -19,15 +20,15 @@ const AppContextProvider = (props) => {
         try {
 
             const { data } = await axios.get(backendUrl + '/api/doctor/list')
-            if (data.success) {
+            if (data.success && Array.isArray(data.doctors) && data.doctors.length > 0) {
                 setDoctors(data.doctors)
             } else {
-                toast.error(data.message)
+                setDoctors(defaultDoctors)
             }
 
         } catch (error) {
-            console.log(error)
-            toast.error(error.message)
+            console.log("Using default doctor data fallback:", error.message)
+            setDoctors(defaultDoctors)
         }
 
     }
